@@ -1,0 +1,77 @@
+Por que usar indices?
+	- Acelera a recuperação
+	- Mantém restrição UNIQUE
+Por que não usar?
+	- Consome espaço em disco
+	- Acarreta sobrecarga
+
+Chave de busca: 
+	- Atributo ou conjunto de atributos utilizados para buscar registros em um arquivo
+
+Tipos de índices: 
+	Primário:
+		- Especifica a ordem sequencial do arquivo
+		- A chave de busca do indice primario normalmente é a chave primaria da tabela
+		- Baseia-se na sequencia fisica da tabela
+
+	Secundário:
+		- As chaves apontam para cada registro em uma tabela
+		- A cada tabela pode ter 'n' indices secundarios
+
+Clustered Index:
+	- Determina a ordem em que as linhas de uma tabela são armazenadas no disco.
+	- São índices primarios que apontam para um grupo de registros
+
+NonClustered Index:
+	- São indices secundarios, índices sem agrupamento
+
+FRAGMENTAÇÃO
+
+	Como ocorre a fragmentação:
+		- Quando dados são modificados, as paginas dos indices sofrem modificação
+
+	Metódos para gerenciar
+		- Excluir e recriar, ênfase no fator de preenchimento
+
+	Fragmentação
+		OLTP: normal, mais alterações, pode ser benefício
+		OLAP: prejudicial, maior leituras, pior acesso
+
+	Quando fazer?
+		Reorganize => ( 5% < fragmentação <= 30%) só pode ser executada online 
+			[ALTER INDEX <INDEX> ON <TABLE> REORGANIZE ]
+		Rebuild => (fragmentação > 30%) pode ser executada online ou offline 
+			[ ALTER INDEX <INDEX> ON <TABLE> REBUILD ]
+
+	Analizando o nivel de fragmentação
+		' sys.dm db index physical stats '
+		SELECT 
+
+
+Diferença clurterede e nonClustered
+	- Com um índice não-clusterizado, o banco salvaria os dados de CEP de forma aleatória no disco e armazenaria no índice apenas um ponteiro para o local onde o dado real está. 
+	- A camada de folha de um indice não clusterizado é constitida de paginas de indices, em vez de paginas de dados.
+	- Com um índice clusterizado, o banco salvaria os dados de CEP ordenados fisicamente e, sempre que um novo dado for inserido ou atualizado, teremos de arcar com o custo de reescrever os dados no índice para que os mesmos continuem ordenados.
+	-Portanto, como a coluna CEP sofrerá poucas ou nenhuma atualização, a melhor estratégia é criar um índice clusterizado para a mesma. Todavia, se a coluna sofresse muitas atualizações, criar um índice clusterizado poderia invalidar o custo x benefício que vimos, com mais sobrecarga e menos performance. 
+
+
+1 - Por que o autor adota a indexação como critério para otimizar um BD?
+	- Acelera a recuperação e mantém a restrição UNIQUE.
+2 - Segundo o autor o que é uma indexação?
+	- São estrutura de dados auxiliares que permitem agilizar a busca em tabelas nos bd
+3 - Qual a estrutura de dados utilizada pelo SGBD para uma indexação?
+	- São as árvores B+, que são árvores balanceadas de busca.
+4 - Segundo o autor, é necessário que toda tabela tenha uma Primary Key? Qual sua relação com um Clustered Index?
+	-  Especifica a ordem sequencial do arquivo, clustered indice são chaves primárias que apontam para um grupo de registros
+5 - Quando é interessante criar um índice NonClustered?
+	- 
+6 - Qual o comando SQL para criação de um indice?
+	- CREATE CLUSTERED INDEX <nome> ON <TABELA><COLUNA>
+7 - Explique o passo-a-passo da utilização de um indice através de um exemplo
+	- 
+8 - O que é uma fragmentação de indice?
+	- Quando dodos são modificados, as páginas dos indices sofrem modificação]
+9 - Faça uma verificação das fragmentações na tabela Orders.
+	- 
+10 - Quais são as duas formas de solucionar uma fragmentação de indice?
+	- Excluir e recriar

@@ -1,0 +1,35 @@
+O que são planos de execução?
+	- Os planos de excução podem dizer-lhe como o SQL Server pode executar uma consulta ou como executou uma consulta.
+	Eles são, portanto, o principal meio de solucionar um desempenho fraco.
+
+Propósito:
+	- O propósito de todos esses processos é gerenciar o sistema de forma que ele faça SELECT, INSERT, UPDATE ou DELETE sobre os dados da melhor forma possivel;
+
+Fases 1 :
+	- No mecanismo relacional, a consulta é analisada e, em seguida, processada pelo otimizador de consultas, que gera um plano de execução.
+	- O plano é enviado (em formato binário) para o Engine de armazenamento, que então usa esse plano como base para recuperar ou modificar os dados futuros.
+	- O mecanismo de armazenamento é onde processos como bloqueio, manutenção de indice e transações ocorre.
+	- Uma vez que os planos de execução são criados no motor relacional, é ai que estaremos concentrando a maior parte de nossa atenção.
+
+Fases 2 :
+	- Syntax Validation
+	- Binding to Objects Loading MetaData
+	- Execution plan
+
+Fases 3 :
+	- Validação da sintaxe (parse), o resultado do parse é um query tree, que nada mais é que uma representação gráfica do comando em formato de uma árvore.
+	- Algebrizer, tabelas e campos na query tree são comparados com o metadata do banco para validar se os objetos acessados realmente existem. Após a analise um binário chamado query processor tree é gerado e enviado para a fase de otimização.
+	- A fase de otimização irá tentar várias alternativas de resolução da sua consulta e atribuir um custo a cada tentativa. A tentativa com menor custo tender a ser a melhor opção.
+	- (Em alguns cenários é impossivel para o otimizador validar todas as opções de planos disponíveis. Na verdade o otimizador tenta trabalhar até achar o que é conhecido como 'good enough plan')
+
+
+O query Optimizer:
+	- O objetivo da query optimization não é encontrar o melhor plano de execução, mas encontrar um plano de execução suficientemente bom.
+	- O otimizador de consultas é essencialmente um software que 'modela' a maneira como o mecanismo relacional do banco de dados funciona.
+	- Em outras palavras, o otimizador descobre a melhor forma de implementar o pedido representado pela consulta T-SQL que voce enviou.
+
+	
+
+	validação da sintaxe (query tree) => validação dos campos (algebrizer) => 
+	=> tenta consultas e atribui custos a elas (otimização), até atingir o 'good enough plan' =>
+	=> plano de execução => engine de armazenamento => 
