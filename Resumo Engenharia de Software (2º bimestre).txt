@@ -1,0 +1,41 @@
+Resumo Engenharia de Software (2º bimestre)
+
+Diagrama de Estados:
+
+http://www.revistabw.com.br/revistabw/uml-diagrama-de-estados/
+
+	- Através de análise das transiçoes entre estados dos objetos de um sistema de software, podem-se prever possíveis operações realizadas, em função de eventos que possam ocorrer.
+	- O estado inicial é obrigatório e final opcional.
+	- Um unico diagrama de estados é criado para um conjunto de classes relacionadas a realização de um caso de uso(F)
+	- As cláusulas entry e exit estão relacionadas a ações enquanto a cláusula do está relacionada a atividades.
+	- Para representar os estados de uma classe, usando o diagrama de transição de estados. Nele representamos os estados, as transições, os eventos, as ações e as atividades.
+	- Uma barra de bifurcação(fork) recebe uma transição de entrada, e cria dois ou mais fluxos de controle paralelos. Cada fluxo é xecutado independentemente e em paralelo com os demais.
+	- Uma barra de junção(join) recebe duas ou mais transições de entrada e une os fluxos de controle em um único fluxo. O objetivo é sincronizar fluxos paralelos. A transição de saída da barra de junção somente é disparada quando todas as transições de entrada estiverem sido disparadas.
+
+
+	- Ação é execução de uma operação
+	- Semelhante a uma ação, uma atividade é algo que é executado pelo objeto. No entanto, um atividade pode ser interrompida.
+	- Uma atividade sempre esta associada a um estado.
+	- Os estados e as transições de um estado de um objeto constituem o seu ciclo de vida.
+	
+
+
+//
+
+Diagrama de atividades: (fluxograma)
+	- São representados os estados de uma atividade, em vez dos estados de um objeto.
+	- O estado de atividade leva um tempo a ser executado, já o estado de ação não.
+	- Raiz de natação: divide o diagrama por quem esta executando
+	- O diagrama de atividade mostra o fluxo de controle mas não as mensagens trocadas entre os objetos
+
+Diagrama de Sequencia:
+	- Enfase na ordenação temporal das mensagens
+	- objetos na horizontal, mensagens vertical
+	- Foco de controle: fica sobre a linha de vida, mostra o periodo no qual o objeto esta executando a ação
+
+Diagrama de Comunicação:
+	- Ênfase na organização dos objetos, sem ordem temporal
+	- new: criação de objetos ou ligação durante a iteração; 
+	- Destroyed: objetos ou ligações detruidos durante a iteeração;
+	- Transient: objetos ou ligações criados e destruídos durante a mesma iteração;
+
