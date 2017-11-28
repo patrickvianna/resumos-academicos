@@ -1,0 +1,47 @@
+Resumo TAP
+
+Persistência:
+
+	Etapas:
+		1 - Carregar drive
+		2 - Definir URL de conexão
+		3 - Estabelecer conexão
+		4 - criar objeto do tipo statement a partir da conexão
+		5 - Executar o comando SQL
+		6 - Feche o statement e a conexão
+
+DAO (Date Acess Object):
+
+	Classe DAO:
+		public interface ArtistaDAO {
+			Collection ObterTodos();
+
+			void Salvar();
+		}
+
+	Classe DAOJDBC:
+		public class ArtistaDAOJDBC extends DAOBaseJDBC implements ArtistaDAO{
+
+			public void Salvar(Artista artista){
+				PreparedStetament stmt;
+
+				try{
+					if(artista.getId() == null){					{
+						stmt = conn.prepareStatement (
+							"INSERT INTO Artista (nome, banda, pais) VALUES (?, ?, ?)");
+					} else {
+						stmt = conn.prepareStatement (
+							"UPDATE Artista SET nome = ?, banda = ?, pais = ? WHERE id = ?");
+						stmt.setLong(4, artista.getId());
+					}
+
+					stmt.setString (1, artista.getNome());
+					stmt.setBoolean (2, artista.getBanda());
+					stmt.setString (3, artista.getPais());
+					stmt.executeUpdate();
+				}catch(SQLException e){
+					sout	("ERRO")
+					system.exit(1);
+				}
+			}
+		}
