@@ -71,3 +71,16 @@ DAO (Date Acess Object):
 			}
 			return set;
 		}
+
+	Chamada:
+
+		AlimentoDAOJDBC alimentoDao = new AlimentoDAOJDBC();
+
+		for(Alimento a: alimentoDao.consultar()){
+			modelo.addRow(new Object[]{
+				a.getId(),
+				a.getNome(),
+				a.getDescricao(),
+				a.getTipo()
+			});
+		}
