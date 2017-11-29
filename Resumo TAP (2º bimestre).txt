@@ -19,7 +19,7 @@ DAO (Date Acess Object):
 			void Salvar();
 		}
 
-	Classe DAOJDBC:
+	Classe DAOJDBC: (INSERT)
 		public class ArtistaDAOJDBC extends DAOBaseJDBC implements ArtistaDAO{
 
 			public void Salvar(Artista artista){
@@ -44,4 +44,30 @@ DAO (Date Acess Object):
 					system.exit(1);
 				}
 			}
+		}
+
+	Classe DAOJDBC: (SELECT)
+		public Collection obterTodos(){
+			Set set = new HashSet();
+			ResultSet rset = null;
+
+			try{
+				PreparedStatement stmt = conn.prepareStatement (
+						"SELECT id, nome, band, pais FROM Artista");
+
+				rset = stmt.executQuery();
+
+				while (rset.next()){
+					Artista artista =  new Artista();
+					artista.setId(new Long(rset.getLong("id")));
+					artista.setNome(rset.getString("nome"));
+					artista.setBanda(new Boolean(rset.getBoolean("banda")));
+					artista.setBanda(rset.getPais("pais"));
+					set.add(artista);
+				}
+			}catch(SQLException e){
+				Sout("ERRO");
+				System.exit(1);
+			}
+			return set;
 		}
