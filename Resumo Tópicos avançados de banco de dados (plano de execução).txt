@@ -1,3 +1,13 @@
+
+https://andrebtoe.com/2014/10/01/plano-de-execucao-sql-server/
+
+http://www.fabioprado.net/2011/03/analisando-o-plano-de-execucao-para.html
+
+https://imasters.com.br/artigo/14642/sql-server/melhorando-consultas-com-o-plano-de-execucao/?trace=1519021197&source=single
+
+https://www.devmedia.com.br/escrevendo-queries-otimizadas-no-sql-server/20403
+
+//
 O que são planos de execução?
 	- Os planos de excução podem dizer-lhe como o SQL Server pode executar uma consulta ou como executou uma consulta.
 	Eles são, portanto, o principal meio de solucionar um desempenho fraco.
@@ -28,8 +38,46 @@ O query Optimizer:
 	- O otimizador de consultas é essencialmente um software que 'modela' a maneira como o mecanismo relacional do banco de dados funciona.
 	- Em outras palavras, o otimizador descobre a melhor forma de implementar o pedido representado pela consulta T-SQL que voce enviou.
 
-	
+
 
 	validação da sintaxe (query tree) => validação dos campos (algebrizer) => 
 	=> tenta consultas e atribui custos a elas (otimização), até atingir o 'good enough plan' =>
 	=> plano de execução => engine de armazenamento => 
+
+
+
+"Coisas que vc precisa saber em relação 'Statistics e Optimizer'"
+
+	Selectivity:
+		Alta seletividade é quando tem varias opções
+		Exemplo: pessoa juridica e fisica, baixa seletividade. CNPJ alta seletividade, tem apenas um para cada registro.
+
+	Density:
+		O contrario de seletividade, quanto mais densa for uma coluna mais registro ela retorna
+
+	Cardinality:
+		É utilizada para medir o numero de linhas que satisfaçam uma condição./// 
+		Por exemplo, imagine uma tabela com 500 linhas e uma consulta com where Nome = 'João', o SQL vai na estatistica e le no histograma que o valor 'João' representa 5% da tabela, portanto a cardinalidade é de (5% * 500) = 25
+
+	SARG: 
+		São condições de sua consulta, o valor que aparece no WHERE.
+		Com base no argumento de consulta (SARG) informado o SQL analisa a selectivity, density e cardinality para gerar o plano.
+
+	O que acontece quando o SQL não consegue estimar a cardinalidade de um valor (SARG)?
+
+	RowModCtr:
+		Existe uma coluna na tabela onde podemos observar quantas alterações ocorreram em uma determinada coluna desde a ultima atualização das estatisticas.
+
+
+	Boas práticas:
+		- Criar uma variável, assim o plano de execução sempre estará lá ao alterar o valor.
+		- Informar o campos do select, em vez de usar "*".
+		- Funções são mais custosas.
+		- Usa UNION em vez do operador OR.
+		- IN, NOT IN, EXIST, NOT EXISTS é melhor que usar o OR.
+		- As vezes subConsultas são melhores que JOINs.
+		- Funções que retornam tabelas são uteis.
+		- Evitar GROUP BYs desnecessários.
+		- Se tiver poucas agregações mas muitas colunas agrupadas não agregadas, reconstruir utilizando subqueries escalares correlatas.
+		- A expressão CASE é muito boa.
+		- Dividir JOINs em tabelas temporárias.
