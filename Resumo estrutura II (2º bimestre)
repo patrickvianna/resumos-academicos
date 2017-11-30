@@ -1,0 +1,64 @@
+Resumo estrutura II
+
+Red-black tree:
+
+	- Apresentam uma altura de, no máximo, igual a 2lg(n+1)
+
+	- Propriedades da árvore rubro-negra
+		1 Todo nó da árvore ou é vermelho ou é preto
+		2  A raiz e as folhas (nil) são pretas
+		3 Se um nó é vermelho, então seus filhos são pretos
+		4  Para todo nó, todos os caminhos do nó até as folhas descendentes contêm o mesmo numero de nos pretos
+
+	- Metade de nós de qualquer caminho são vermelos
+	- Altura = metade da altura
+	- Altura negra é o numero de nós negros encontrados
+
+	Inserção:
+		- Um nó sempre é inserido vermelho, assim não altera a altura negra da arvore
+		Caso 1:
+			- Caso a inserção seja feita em uma arvore vazia, basta alterar a cor do nó para preto, satisfazendo assim a propriedade 2;
+		Caso 2:
+			- 
+
+
+Heap: 
+	- Estruturas próprias para implementação de listas de de prioridade
+	- Podem ser pensadas como árvores binárisa (mas não de busca) onde todos os nós possuem as prioridades
+	- A raiz contém a chave (prioridade) de menor valor
+	- Diferentemente de árvores binárias de busca, heaps são implementados usando arrays
+	- Para armazenarmos uma árvore de altura h precisamos de um array de 2^h
+
+	Migração de valores de um heap: Ele sempre procura o menor valor
+
+	- Os pais devem ser maiores que os filhos (heap de máximo)
+	- formula para achar seus filhos (n*2)+1 e (n*2)+2
+
+	Processo de remoção: 
+	- O numero que esta na raiz é enviado para a ultima casa do vetor
+	- O numero que esta na ultima posição é enviado para raiz
+
+Treap:
+	- É a mesma coisa do heap, só que não é ordenado pela prioridade
+	- Não sei pq tem prioridade entao 
+
+Tries:
+	- Usada para fazer uma rapida busca em grandes textos
+	- Em vez de comparar chaves inteiras entre si, as comparações são feitas componente a componente.
+
+	Vantagens:
+		- Não ocorre desperdicio de espaço em dados com tamanho variavel
+		- Não precisa aplicar funções para converter chaves alfabéticas em numéricas
+
+	R-way trie, se for reservada uma quantidade fixa de espaço a cada novo nó, poderá ocorrer despedicio de espaço, porque nem todas as chaves vão ocupar todo esse espaço reservado.
+
+	TST -Ternary Sarch Tree, tem um desempenho muito melhor em relação ao espaço, pois não o alocam em grande quantidade. Essas estruturas são arvores ternárias, onde os filhos do centro de cada nodo representa o caracter seguinte da chave e os filhos da direita e da esquerda representam caracteres alternativos, istoé, pretencem a outra palavra.
+
+	Aplicação usual de Trie: Corretor ortográfico.
+
+	Auto-preenchimento: Armazena palavras mais usadas em uma TRIE. A medida que vai digitando exibe as opções possiveis de palavras já usadas.
+	Aplicação: Browsers, emails.
+
+
+
+
